@@ -20,18 +20,18 @@ spec:
       - name: fedco-devcentral-app
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         ports:
-          - containerPort: 3000
+          - containerPort: {{ .Values.service.port }}
         imagePullPolicy: Always
         volumeMounts:
           - name: config-js-volume
             mountPath: /app/build/config.js
-            subPath: stage.js
+            subPath: config.js
 
 
       volumes:
         - name: config-js-volume
           configMap:
-            name: stage-configmap
+            name: {{ .Values.configMap.name }}
 ---
 apiVersion: v1
 kind: Service
@@ -44,5 +44,5 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: 3000
+      targetPort: {{ .Values.service.port }}
       protocol: TCP
