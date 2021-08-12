@@ -139,9 +139,19 @@ it will delete all helm charts
 
 
 
+### Fedco parameters
 
-
-
+| Parameter                            | Description                                                                   | Default                                                 |
+|--------------------------------------|-------------------------------------------------------------------------------|---------------------------------------------------------|
+| `image.registry`                     |  image registry                                                      | `docker.io`                                             |
+| `image.repository`                   |  image name                                                          | `sagark24/fedco`                                     |
+| `image.tag`                          |  image tag                                                           | `{TAG_NAME}`                                            |
+| `image.pullPolicy`                   |  image pull policy                                                   | `Always`                                          |
+| `image.pullSecrets`                  | Specify docker-registry secret names as an array                     | `[]` (does not add image pull secrets to deployed pods) |
+| `image.debug`                        | Specify if debug logs should be enabled                              | `false`                                                   
+| `service.type`                       | Kubernetes Service type                                                       | `ClusterIP`                                          |                                                                                                                                           
+| `service.port`                       | Kubernetes Service Port                                                       | `3000`                                          |   
+| `service.name`                       | Kubernetes Service name                                                       | `name of service`                                          | 
 
 
 
