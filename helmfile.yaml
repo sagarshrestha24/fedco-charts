@@ -1,0 +1,12 @@
+environments:
+  local:
+  dev:
+  stage:
+releases:
+    - name: fedco-{{ .Environment.Name }}
+      chart: ./charts/fedco
+      values:
+          -  ./values/values-{{ .Environment.Name }}.yaml
+
+
+    

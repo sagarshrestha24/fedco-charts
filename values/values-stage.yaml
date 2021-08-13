@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: sagark24/fedco
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
@@ -39,7 +39,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 3000
-  name: fedco-devcentral-app-local
+  name: fedco
   
 
 labels: 
@@ -81,20 +81,15 @@ tolerations: []
 affinity: {}
 
 configMap:
-    name: local-configmap
+    name: stage-configmap
 config: 
-     config: |+
+     config: |2+
         window.config = {
-        "REACT_APP_DEV_CENTRAL_APP_URL": "http://localhost:3000",
-        "REACT_APP_SPEC_VALIDATOR_URL": "http://3.218.141.44:9001",
-        "REACT_APP_SPEC_MNGR_URL": "http://3.218.141.44:9001",
-        "REACT_APP_PROXY_GEN_URL": "http://3.218.141.44:9001",
-        "REACT_APP_CONFIG_MNGR_URL": "http://3.218.141.44:9001",
-        "REACT_APP_EDGE_SECURED_API_URL": "https://amer-mint-partner01-test.apigee.net",
-        "REACT_APP_JENKINS_LOCATION_API": "http://107.23.248.181:8080",
-        "REACT_APP_AZURE_AD_URL": "https://login.microsoftonline.com",
-        "REACT_APP_AZURE_AD_TENANT_ID": "f2dd062d-3e19-44b1-aeef-11297fbec7e2",
-        "REACT_APP_AZURE_AD_APP_CLIENT_ID": "caa10914-2e2a-4dbf-9ddc-bdd5af07dab8",
-        "ENABLE_DEMO_LOGIN": true,
-        "local": true
-            }
+         "REACT_APP_DEV_CENTRAL_APP_URL": "https://fedco-aks-ingress-qa.eastus.cloudapp.azure.com",
+         "REACT_APP_EDGE_SECURED_API_URL": "https://amer-mint-partner01-test.apigee.net",
+         "REACT_APP_JENKINS_LOCATION_API": "http://107.23.248.181:8080",
+         "REACT_APP_AZURE_AD_URL": "https://login.microsoftonline.com",
+         "REACT_APP_AZURE_AD_TENANT_ID": "f2dd062d-3e19-44b1-aeef-11297fbec7e2",
+         "REACT_APP_AZURE_AD_APP_CLIENT_ID": "74bd7b02-a1a1-49c6-a6e2-924c05cf9ee1"
+          }
+

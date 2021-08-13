@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.service.name }}
+  name: {{ include "fedco.fullname" . }}
   
   labels:
-    app: {{ .Values.service.name }}
+    app: {{ include "fedco.fullname" . }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Values.service.name }}
+      app: {{ include "fedco.fullname" . }}
   template:
     metadata:
-      name: fedco-devcentral-app-pod
+      name: fedco-devcentral-app
       labels:
-        app: {{ .Values.service.name }}
+        app: {{ include "fedco.fullname" . }}
     spec:
       containers:
-      - name: fedco-devcentral-app
+      - name: fedco
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-        ports: 
+        ports:
           - containerPort: {{ .Values.service.port }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         volumeMounts:
@@ -31,16 +31,16 @@ spec:
       volumes:
         - name: config-js-volume
           configMap:
-            name: {{ .Values.config.name }}
+            name: {{ .Values.configMap.name }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.service.name }}
+  name: {{ include "fedco.fullname" . }}
   
 spec:
   selector:
-    app: {{ .Values.service.name }}
+    app: {{ include "fedco.fullname" . }}
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
