@@ -1,5 +1,5 @@
 apiVersion: v2
-name: fedco
+name: fedco-devcentral-app
 
 description: A Helm chart for Kubernetes
 

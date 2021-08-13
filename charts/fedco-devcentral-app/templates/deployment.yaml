@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "fedco.fullname" . }}
+  name: {{ include "fedco-devcentral-app.fullname" . }}
   
   labels:
-    app: {{ include "fedco.fullname" . }}
+    app: {{ include "fedco-devcentral-app.fullname" . }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ include "fedco.fullname" . }}
+      app: {{ include "fedco-devcentral-app.fullname" . }}
   template:
     metadata:
       name: fedco-devcentral-app
       labels:
-        app: {{ include "fedco.fullname" . }}
+        app: {{ include "fedco-devcentral-app.fullname" . }}
     spec:
       containers:
-      - name: fedco
+      - name: fedco-devcentral-app
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         ports:
           - containerPort: {{ .Values.service.port }}
@@ -36,11 +36,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "fedco.fullname" . }}
+  name: {{ include "fedco-devcentral-app.fullname" . }}
   
 spec:
   selector:
-    app: {{ include "fedco.fullname" . }}
+    app: {{ include "fedco-devcentral-app.fullname" . }}
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}

@@ -3,8 +3,8 @@ environments:
   dev:
   stage:
 releases:
-    - name: fedco-{{ .Environment.Name }}
-      chart: ./charts/fedco
+    - name: fedco-devcentral-app-{{ .Environment.Name }}
+      chart: ./charts/fedco-devcentral-app
       values:
           -  ./values/values-{{ .Environment.Name }}.yaml
 
